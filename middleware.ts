@@ -4,11 +4,11 @@ import { NextResponse } from "next/server";
 const isProtectedRoute = createRouteMatcher(["/todo(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId, redirectToSignIn } = auth();
+  const { userId, signIn } = await auth();
 
   // If the user isn't signed in and the route is private, redirect to sign-in
   if (!userId && isProtectedRoute(req)) {
-    return redirectToSignIn({ returnBackUrl: "/login" });
+    return signIn.redirectToSignIn({ returnBackUrl: "/login" });
   }
 
   // If the user is logged in and the route is protected, let them view.
