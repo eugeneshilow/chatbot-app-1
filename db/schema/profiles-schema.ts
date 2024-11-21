@@ -1,18 +1,17 @@
-import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
-
-export const memberships = pgEnum("membership", ["free", "pro"]);
+import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const profilesTable = pgTable("profiles", {
-  userId: text("user_id").notNull().primaryKey(),
-  membership: memberships("membership").notNull().default("free"),
-  stripeCustomerId: text("stripe_customer_id").notNull().unique(),
-  stripeSubscriptionId: text("stripe_subscription_id").unique(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull().unique(),
+  email: text("email").notNull(),
+  name: text("name"),
+  imageUrl: text("image_url"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .notNull()
     .$onUpdate(() => new Date())
 });
 
-export type InsertProfile = typeof profilesTable.$inferSelect;
-export type SelectProfile = typeof profilesTable.$inferInsert;
+export type InsertProfile = typeof profilesTable.$inferInsert;
+export type SelectProfile = typeof profilesTable.$inferSelect;

@@ -8,6 +8,20 @@
       "when": 1732113034111,
       "tag": "0000_magical_wolfsbane",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1732210752874,
+      "tag": "0001_typical_madame_web",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1732211099001,
+      "tag": "0002_curly_angel",
+      "breakpoints": true
     }
   ]
 }
